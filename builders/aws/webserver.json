@@ -14,7 +14,7 @@
     "vpc_id": "vpc-b73666d3",
     "subnet_id": "subnet-64f61b2d",
     "associate_public_ip_address": true,
-    "ami_name": "packer-example {{timestamp}}"
+    "ami_name": "nginx-webserver {{timestamp}}"
   }],
   "provisioners": [{
     "type": "shell",
