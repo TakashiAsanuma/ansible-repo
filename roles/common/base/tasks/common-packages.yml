@@ -1,0 +1,26 @@
+---
+- name: be sure common packages are installed
+  yum: name={{item}} state=installed
+  with_items:
+    - libselinux-python
+    - ntp
+    - bind-utils
+    - gcc-c++ 
+    - patch 
+    - readline 
+    - readline-devel
+    - zlib
+    - zlib-devel
+    - libyaml-devel
+    - libffi-devel
+    - openssl-devel
+    - make
+    - bzip2
+    - autoconf
+    - automake
+    - libtool
+    - bison
+    - curl
+    - git-core
+    - vim
+  tags: common-packages

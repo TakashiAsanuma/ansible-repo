@@ -1,0 +1,8 @@
+---
+- name: be sure remi repository is installed
+  yum: name=http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+  tags: remi
+
+- name: enable remi repository
+  ini_file: dest=/etc/yum.repos.d/remi.repo section="remi" option="enabled" value="1"
+  tags: remi
