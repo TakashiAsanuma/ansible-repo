@@ -19,7 +19,7 @@
   }, {
     "type": "ansible-local",
     "playbook_file": "webservers.yml",
-    "inventory_file": "inventories/aws",
+    "inventory_file": "inventories/packer/hosts",
     "role_paths": [
       "roles"
     ],

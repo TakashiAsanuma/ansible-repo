@@ -16,7 +16,10 @@ Environments
 Execute
 =======
 Packer
-  - packer build builders/aws/webserver.json
+  - AWS
+    - packer build builders/aws/webserver.json
+  - Docker
+    - packer build builders/docker/webserver.json
 
 Ansible
   - ansible-playbook -i inventories/development/hosts site.yml
