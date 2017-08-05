@@ -1,5 +1,5 @@
 - hosts: web
-  sudo: yes
+  become: yes
   roles:
     - roles/common/base
     - roles/common/nginx

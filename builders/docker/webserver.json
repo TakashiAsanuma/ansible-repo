@@ -1,7 +1,11 @@
 {
+  "variables": {
+          "ansible_host": "centos"
+  },
   "builders": [{
     "type": "docker",
-    "image": "centos:centos6.9",
+    "image": "centos:latest",
+    "run_command": ["--privileged", "-d", "-i", "-t", "{{.Image}}", "/sbin/init"],
     "export_path": "controller.tar"
   }],
   "provisioners": [{
