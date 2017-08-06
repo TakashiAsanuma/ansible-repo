@@ -20,12 +20,9 @@ Environments
 Execute
 =======
 Packer
-  - AWS
-    - packer build builders/aws/webserver.json
-  - Docker
-    - packer build builders/docker/webserver.json
-  - Docker
-    - packer build builders/gcp/webserver.json
+  - AWS: packer build builders/aws/webserver.json
+  - Docker: packer build builders/docker/webserver.json
+  - GCP: packer build builders/gcp/webserver.json
 
 Ansible
   - ansible-playbook -i inventories/development/hosts site.yml
