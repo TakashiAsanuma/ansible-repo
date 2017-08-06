@@ -3,37 +3,39 @@
     "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
     "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}"
   },
-  "builders": [{
-    "type": "amazon-ebs",
-    "access_key": "{{user `aws_access_key`}}",
-    "secret_key": "{{user `aws_secret_key`}}",
-    "region": "ap-northeast-1",
-    "source_ami": "ami-3bd3c45c",
-    "instance_type": "t2.micro",
-    "ssh_username": "ec2-user",
-    "vpc_id": "vpc-b73666d3",
-    "subnet_id": "subnet-64f61b2d",
-    "associate_public_ip_address": true,
-    "ami_name": "nginx-webserver {{timestamp}}"
-  }],
-  "provisioners": [{
-    "type": "shell",
-    "inline": [
-      "sudo yum -y update",
-      "sudo yum -y --enablerepo=epel install ansible",
-      "mkdir -p /tmp/ansible-local"
-    ]
-  }, {
-    "type": "file",
-    "source": "./",
-    "destination": "/tmp/ansible-local"
-  }, {
-    "type": "ansible-local",
-    "playbook_file": "webservers.yml",
-    "inventory_file": "inventories/aws",
-    "role_paths": [
-      "roles"
-    ],
-    "staging_directory": "/tmp/ansible-local"
-  }]
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "region": "ap-northeast-1",
+      "source_ami": "ami-3bd3c45c",
+      "instance_type": "t2.micro",
+      "ssh_username": "ec2-user",
+      "vpc_id": "vpc-b73666d3",
+      "subnet_id": "subnet-64f61b2d",
+      "associate_public_ip_address": true,
+      "ami_name": "nginx-webserver {{timestamp}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo yum -y update",
+        "sudo yum -y --enablerepo=epel install ansible",
+        "mkdir -p /tmp/ansible-local"
+      ]
+    }, {
+      "type": "file",
+      "source": "./",
+      "destination": "/tmp/ansible-local"
+    }, {
+      "type": "ansible-local",
+      "playbook_file": "webservers.yml",
+      "inventory_file": "inventories/aws",
+      "role_paths": ["roles"],
+      "staging_directory": "/tmp/ansible-local"
+    }
+  ]
 }

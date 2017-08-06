@@ -2,36 +2,40 @@
   "variables": {
           "ansible_host": "centos"
   },
-  "builders": [{
-    "type": "docker",
-    "image": "centos:latest",
-    "run_command": ["--privileged", "-d", "-i", "-t", "{{.Image}}", "/sbin/init"],
-    "export_path": "controller.tar"
-  }],
-  "provisioners": [{
-    "type": "shell",
-    "inline": [
-      "yum -y update",
-      "yum -y install epel-release",
-      "yum -y --enablerepo=epel install ansible",
-      "mkdir -p /tmp/ansible-local"
-    ]
-  }, {
-    "type": "file",
-    "source": "./",
-    "destination": "/tmp/ansible-local"
-  }, {
-    "type": "ansible-local",
-    "playbook_file": "webservers.yml",
-    "inventory_file": "inventories/packer/hosts",
-    "role_paths": [
-      "roles"
-    ],
-    "staging_directory": "/tmp/ansible-local"
-  }],
-  "post-processors": [{
-    "type": "docker-import",
-    "repository": "takashiasanuma/centos",
-    "tag": "centos6.9_nginx-webserver_{{timestamp}}"
-  }]
+  "builders": [
+    {
+      "type": "docker",
+      "image": "centos:latest",
+      "run_command": ["--privileged", "-d", "-i", "-t", "{{.Image}}", "/sbin/init"],
+      "export_path": "controller.tar"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "yum -y update",
+        "yum -y install epel-release",
+        "yum -y --enablerepo=epel install ansible",
+        "mkdir -p /tmp/ansible-local"
+      ]
+    }, {
+      "type": "file",
+      "source": "./",
+      "destination": "/tmp/ansible-local"
+    }, {
+      "type": "ansible-local",
+      "playbook_file": "webservers.yml",
+      "inventory_file": "inventories/packer/hosts",
+      "role_paths": ["roles"],
+      "staging_directory": "/tmp/ansible-local"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "docker-import",
+      "repository": "takashiasanuma/centos",
+      "tag": "centos6.9_nginx-webserver_{{timestamp}}"
+    }
+  ]
 }
