@@ -1,0 +1,4 @@
+- name: be sure packages for rbenv are installed
+  yum: name={{item}} state=installed
+  with_items: "{{ rbenv_packages }}"
+

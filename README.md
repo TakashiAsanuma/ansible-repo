@@ -17,6 +17,10 @@ Environments
   - GOOGLE_APPLICATION_CREDENTIALS
   - GCLOUD_PROJECT
 
+Target OS
+======
+- CentOS7, 6 and Amazon Linux
+
 Execute
 =======
 Packer

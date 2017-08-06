@@ -1,0 +1,13 @@
+---
+rbenv_root: "/opt/rbenv"
+ruby_version: "2.4.1"
+
+rbenv_packages:
+- bzip2
+- gcc
+- git
+- libffi-devel
+- libyaml-devel
+- openssl-devel
+- readline-devel
+- zlib-devel
