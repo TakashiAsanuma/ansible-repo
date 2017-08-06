@@ -29,7 +29,7 @@
     {
       "type": "docker-import",
       "repository": "takashiasanuma/centos",
-      "tag": "centos6.9_nginx-webserver_{{timestamp}}"
+      "tag": "centos_latest_web_server_{{timestamp}}"
     }
   ]
 }
