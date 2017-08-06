@@ -16,19 +16,13 @@
       "inline": [
         "yum -y update",
         "yum -y install epel-release",
-        "yum -y --enablerepo=epel install ansible",
-        "mkdir -p /tmp/ansible-local"
+        "yum -y --enablerepo=epel install ansible"
       ]
-    }, {
-      "type": "file",
-      "source": "./",
-      "destination": "/tmp/ansible-local"
     }, {
       "type": "ansible-local",
       "playbook_file": "webservers.yml",
       "inventory_file": "inventories/packer/hosts",
-      "role_paths": ["roles"],
-      "staging_directory": "/tmp/ansible-local"
+      "role_paths": ["roles"]
     }
   ],
   "post-processors": [
