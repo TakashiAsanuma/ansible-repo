@@ -1,0 +1,9 @@
+---
+- name: be sure apche is installed
+  yum: name={{item}} state=installed
+  with_items: "{{ apache_packages }}"
+  tags: apache
+
+- name: be sure apache is running and enabled
+  service: name=httpd state=started enabled=yes
+  tags: apache

@@ -3,4 +3,5 @@
   roles:
     - roles/common/base
     - roles/common/rbenv
+    - roles/common/apache
 
