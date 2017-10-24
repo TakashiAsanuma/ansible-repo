@@ -6,6 +6,7 @@ Versions
 
 - packer 1.0.3
 - ansible 2.3.1.0
+- Terraform 0.10.7
 
 Environments
 =======
