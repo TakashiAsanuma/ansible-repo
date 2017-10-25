@@ -1,7 +1,5 @@
 # Configure the Google Cloud provider
 provider "google" {
-  credentials = "${file("/Users/asanuma/myreader-a4f88e1ea708.json")}"
-  project = "myreader-1359"
   region = "asia-northeast1-b"
 }
 
