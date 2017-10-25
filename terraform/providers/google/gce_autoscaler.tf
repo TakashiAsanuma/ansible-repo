@@ -3,6 +3,8 @@ provider "google" {
   region = "asia-northeast1"
 }
 
+variable "image" {}
+
 resource "google_compute_http_health_check" "default" {
   name         = "authentication-health-check"
   request_path = "/"
@@ -19,15 +21,15 @@ resource "google_compute_instance_template" "webserver" {
   tags = ["http-server", "https-server"]
 
   disk {
-    source_image = "packer-1508896147"
+    source_image = "${var.image}"
   }
 
   network_interface {
     network = "default"
   }
 
-  service_account {
-    scopes = ["userinfo-email", "compute-ro", "storage-ro"]
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
