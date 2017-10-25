@@ -6,6 +6,7 @@ Versions
 
 - packer 1.0.3
 - ansible 2.3.1.0
+- Terraform 0.10.7
 
 Environments
 =======
@@ -23,10 +24,18 @@ Target OS
 
 Execute
 =======
+Terraform
+  - GCP:
+    - terraform plan -var 'image=[image name]' -out=terraform/providers/google/gce.plan terraform/providers/google/
+    - terraform apply terraform/providers/google/gce.plan
+
 Packer
   - AWS: packer build builders/aws/webserver.json
   - Docker: packer build builders/docker/webserver.json
   - GCP: packer build builders/gcp/webserver.json
+
+  - Get created image name
+    - packer build -machine-readable builders/gcp/webserver.json | awk -F, '$0 ~/artifact,0,id/ {print $6}'
 
 Ansible
   - ansible-playbook -i inventories/development/hosts site.yml
