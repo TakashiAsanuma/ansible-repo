@@ -1,0 +1,55 @@
+{
+  "variables" : {
+    "api_url": "{{env `IDCF_API_URL`}}",
+    "api_key": "{{env `IDCF_API_KEY`}}",
+    "secret_key": "{{env `IDCF_API_SECRET`}}",
+    "ip_address_id" : "{{env `IDCF_IP_ADDRESS_ID`}}",
+    "ssh_private_key_file" : "{{env `SSH_PRIVATE_KEY_FILE`}}"
+  },
+  "builders": [
+    {
+      "type": "cloudstack",
+      "communicator": "ssh",
+      "api_url": "{{user `api_url`}}",
+      "api_key": "{{user `api_key`}}",
+      "secret_key": "{{user `secret_key`}}",
+      "http_get_only": true,
+      "public_ip_address": "{{user `ip_address_id`}}",
+      "use_local_ip_address": false,
+
+      "cidr_list": ["0.0.0.0/0"],
+      "hypervisor": "VMware",
+      "network": "weber-network1",
+      "service_offering": "light.S1",
+      "source_template": "CentOS 7.3 64-bit",
+      "zone": "weber",
+      "keypair": "myreader",
+      "ssh_username": "root",
+      "ssh_private_key_file": "{{user `ssh_private_key_file`}}",
+      "ssh_timeout": "30m",
+
+      "template_name": "Template-{{isotime \"2006-01-02\"}}",
+      "template_display_text": "{{isotime \"2006-01-02\"}}",
+      "template_featured": true,
+      "template_password_enabled": false,
+      "template_scalable": true,
+      "template_os": "Other CentOS (64-bit)"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'packer' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'",
+      "inline": [
+        "yum -y update",
+        "yum -y install epel-release",
+        "yum -y --enablerepo=epel install ansible"
+      ]
+    }, {
+      "type": "ansible-local",
+      "playbook_file": "webservers.yml",
+      "inventory_file": "inventories/packer/hosts",
+      "role_paths": ["roles"]
+    }
+  ]
+}
