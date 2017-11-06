@@ -5,9 +5,9 @@
     - libselinux-python
     - ntp
     - bind-utils
-    - gcc-c++ 
-    - patch 
-    - readline 
+    - gcc-c++
+    - patch
+    - readline
     - readline-devel
     - zlib
     - zlib-devel
@@ -21,6 +21,8 @@
     - libtool
     - bison
     - curl
+    - libcurl-devel
+    - wget
     - git-core
     - vim
   tags: common-packages
